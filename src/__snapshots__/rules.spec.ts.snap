@@ -1,0 +1,56 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`rules overview > matches the M&M example 1`] = `
+[
+  {
+    "pointsAwarded": 14,
+    "ruleName": "Point per alphanumeric character in retailer name",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 25,
+    "ruleName": "Lump points if total is a multiple of 0.25",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 50,
+    "ruleName": "Lump points if total is round dollar amount (no cents)",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 10,
+    "ruleName": "Points for every 2 items",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 10,
+    "ruleName": "Lump points if purchase time is between 2:00pm and 4:00pm",
+    "ruleVersion": 1,
+  },
+]
+`;
+
+exports[`rules overview > matches the target example 1`] = `
+[
+  {
+    "pointsAwarded": 6,
+    "ruleName": "Point per alphanumeric character in retailer name",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 10,
+    "ruleName": "Points for every 2 items",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 6,
+    "ruleName": "Lump points if purchase date's day-of-month is odd number",
+    "ruleVersion": 1,
+  },
+  {
+    "pointsAwarded": 6,
+    "ruleName": "Points for every item with a description whose length is a multiple of 3",
+    "ruleVersion": 1,
+  },
+]
+`;
