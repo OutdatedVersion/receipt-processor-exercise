@@ -16,10 +16,7 @@ jobs:
       - name: Unit tests
         run: npm test
 
-      - name: Build image
-        run: docker build --tag idk .
-
-      - name: Start container
+      - name: Build image and start container
         run: docker compose up -d
 
       - name: Integration tests

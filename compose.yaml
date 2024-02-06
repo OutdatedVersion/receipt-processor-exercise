@@ -4,4 +4,4 @@ services:
     environment:
       TZ: 'UTC'
     ports:
-      - '2000'
+      - '2000:2000'
