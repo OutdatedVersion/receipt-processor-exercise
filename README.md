@@ -8,7 +8,7 @@ Via Compose:
 1. `docker compose up -d`
 
 Yourself:
-1. Clone repository: `git clone https://github.com/OutdatedVersion/receipt-thing.git`
+1. Clone repository: `git clone https://github.com/OutdatedVersion/receipt-processor-exercise.git`
 1. Build image: `docker image build -t receipt-thing .`
 1. Start container: `docker run --rm -p 2000:2000 receipt-thing`
 1. Verify: `curl 127.0.0.1:2000/health`
