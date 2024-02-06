@@ -1,16 +1,17 @@
 import { serve } from '@hono/node-server';
 import { app } from './app';
+import { logger } from './logger';
 
 const server = serve(
   {
     port: 2000,
     fetch: app.fetch,
   },
-  (addr) => console.log(`[server] Listening on ${addr.address}:${addr.port}`),
+  (addr) => logger.info(`Listening on ${addr.address}:${addr.port}`),
 );
 
 process.on('SIGTERM', async () => {
-  console.log('[server] Shutting down: Heard SIGTERM');
+  logger.info('Shutting down: Heard SIGTERM');
   server.close();
 
   const message = await Promise.race([
@@ -23,14 +24,14 @@ process.on('SIGTERM', async () => {
     ),
     new Promise<void>((resolve) => {
       server.on('close', () => {
-        console.log('[server] Connections closed. Goodbye!');
+        logger.info('Connections closed. Goodbye!');
         resolve();
       });
     }),
   ]);
 
   if (message) {
-    console.log(`[server] ${message}`);
+    logger.info(message);
   }
 
   process.exit(0);
