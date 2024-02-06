@@ -45,6 +45,8 @@ const receipts = new Hono()
     },
   );
 
+const health = new Hono().get('/', (ctx) => ctx.text('hi'));
+
 export const app = new Hono();
-const routes = app.route('/receipts', receipts);
+const routes = app.route('/receipts', receipts).route('/health', health);
 export type Routes = typeof routes;
