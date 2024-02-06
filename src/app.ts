@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { ProcessedReceipt, Storage, receiptSchema } from './types';
 import { DefaultRules, applyRules } from './rules';
 import { randomUUID } from 'crypto';
+import { HTTPException } from 'hono/http-exception';
+import { logger } from './logger';
 
 const storage: Storage = Object.freeze({ receipts: new Map() });
 
@@ -48,5 +50,34 @@ const receipts = new Hono()
 const health = new Hono().get('/', (ctx) => ctx.text('hi'));
 
 export const app = new Hono();
+
+app.onError((error, ctx) => {
+  if (error instanceof HTTPException) {
+    return error.getResponse();
+  }
+
+  logger.error('Uncaught error', error.stack);
+
+  return ctx.json(
+    {
+      name: error.name,
+      message: error.message,
+      stack: process.env.ENV === 'development' ? error.stack : undefined,
+    },
+    {
+      status: 500,
+    },
+  );
+});
+
+app.notFound((ctx) => {
+  return ctx.json({
+    name: 'NotFoundError',
+    message: 'Route not found',
+    data: { path: ctx.req.path },
+  });
+});
+
 const routes = app.route('/receipts', receipts).route('/health', health);
+// Used for Hono client integration
 export type Routes = typeof routes;
