@@ -1,0 +1,7 @@
+services:
+  api:
+    build: .
+    environment:
+      TZ: 'UTC'
+    ports:
+      - '2000'
